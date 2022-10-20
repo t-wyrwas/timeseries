@@ -1,11 +1,14 @@
 from fastapi import FastAPI
-from api.v1 import routes as v1_routes
 import uvicorn
+
+from api.v1 import routes as v1_routes
+from repositories import init_db
+
+init_db()
 
 app = FastAPI()
 
 app.include_router(v1_routes, prefix="/api")
-
 
 @app.get("/healthz")
 def healthz():
