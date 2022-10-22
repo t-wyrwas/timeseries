@@ -9,6 +9,7 @@ from twts_api.repositories.db_config import DbConfig
 
 
 def init_db():
+    # this needs to be run if any operations of repository need to work
     mapper_registry = registry()
 
     bucket_table = Table(
@@ -36,5 +37,10 @@ def init_db():
 
     mapper_registry.map_imperatively(Timeserie, timeserie_table)
 
-    with get_session(DbConfig.from_env()) as session:
-        mapper_registry.metadata.create_all(session.bind)
+    engine = create_engine(
+        "postgresql+psycopg2://postgres:postgres@localhost:5432/twts",
+        echo=True,
+        future=True,
+    )
+
+    mapper_registry.metadata.create_all(engine)
