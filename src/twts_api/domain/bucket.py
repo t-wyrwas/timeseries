@@ -7,10 +7,6 @@ class Bucket:
         self.name = name
         self._timeseries = list()
 
-    # @property
-    # def name(self):
-    #     return self._name
-
     def add(self, timeserie: Timeserie):
         self._timeseries.append(timeserie)
 
