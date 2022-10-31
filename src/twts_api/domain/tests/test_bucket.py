@@ -1,19 +1,19 @@
 from twts_api.domain.bucket import Bucket
 from twts_api.domain.timeserie import Timeserie
-import pytest
 
-def test_bucket_name_can_set():
+def test_bucket_holds_a_name():
     bucket = Bucket(name="test_bucket")
     assert bucket.name == "test_bucket"
 
-def test_bucket_name_is_immutable():
+def test_bucket_holds_added_timeseries():
     bucket = Bucket(name="test_bucket")
-    with pytest.raises(AttributeError):
-        bucket.name = "other_name"
+    ts1 = Timeserie(name="timeserie1")
+    ts2 = Timeserie(name="timeserie2")
+    bucket.add(ts1)
+    bucket.add(ts2)
+    assert bucket.get_by(ts1.name) == ts1
+    assert bucket.get_by(ts2.name) == ts2
 
-def test_bucket_add_adds_timeserie():
+def test_bucket_returns_none_for_unknown_timeserie():
     bucket = Bucket(name="test_bucket")
-    ts_name = "timeserie1"
-    ts = Timeserie(name=ts_name)
-    bucket.add(ts)
-    assert bucket.get(ts_name) == ts
+    assert bucket.get_by("unknown") == None

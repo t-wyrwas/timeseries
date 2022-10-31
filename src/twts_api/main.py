@@ -10,7 +10,7 @@ app = FastAPI()
 async def startup_event():
     init_db()
 
-app.include_router(v1_routes, prefix="/api")
+app.include_router(v1_routes, prefix="/api/v1")
 
 @app.get("/healthz")
 def healthz():

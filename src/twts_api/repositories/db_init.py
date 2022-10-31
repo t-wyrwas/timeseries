@@ -27,15 +27,16 @@ def init_db():
         Column("name", String(50), unique=True),
     )
 
+    mapper_registry.map_imperatively(Timeserie, timeserie_table)
+
     mapper_registry.map_imperatively(
         Bucket,
         bucket_table,
         properties={
-            "_timeseries": relationship(Timeserie, backref="bucket", order_by=timeserie_table.c.id)
+            # "_timeseries": relationship(Timeserie, backref="bucket", order_by=timeserie_table.c.id)
+            "_timeseries": relationship(Timeserie, collection_class=list)
         },
     )
-
-    mapper_registry.map_imperatively(Timeserie, timeserie_table)
 
     engine = create_engine(
         "postgresql+psycopg2://postgres:postgres@localhost:5432/twts",
