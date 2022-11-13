@@ -4,10 +4,10 @@
 with pkgs;
 mkShell {
     buildInputs = [
-        python38
-        python38Packages.pip
-        python38Packages.pip-tools
-        python38Packages.pip-tools
+        python39
+        python39Packages.pip
+        python39Packages.pip-tools
+        python39Packages.pip-tools
     ];
     shellHook = ''
     pip-compile
