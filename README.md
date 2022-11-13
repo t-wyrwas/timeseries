@@ -1,5 +1,7 @@
 # Twts - timeseries API
 
+Timeseries store written in Python for educational purposes - showcase of architectural patterns and tooling
+
 ## Development environment
 
 1. Install (Nix package manager)[https://nixos.org/download.html].
