@@ -4,14 +4,29 @@
 with pkgs;
 mkShell {
     buildInputs = [
-        python310
-        python310Packages.pip
-        python310Packages.pip-tools
+        python38
+        python38Packages.pip
+        python38Packages.pip-tools
+        python38Packages.pip-tools
     ];
     shellHook = ''
     pip-compile
     alias dc='docker compose'
+    alias pip='python -m pip'
     echo "Use handy aliases:"
     echo "* 'dc' for 'docker compose'"
+
+    if [ -d "./.venv" ]
+    then
+        echo "Virtual environment (./.venv) exist."
+        source .venv/bin/activate
+    else
+        echo "Virtual environment (./.venv) does not exist."
+        echo "Creating a new one..."
+        python -m venv .venv
+        source .venv/bin/activate
+        pip install -r requirements.txt
+        pip install -r requirements-dev.txt
+    fi
     '';
 }
