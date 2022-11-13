@@ -1,22 +1,17 @@
 # Twts - timeseries API
 
-## Init dev environment
+## Development environment
 
 1. Install (Nix package manager)[https://nixos.org/download.html].
-1. Run nix shell to start using proper version of Python:
+1. Run nix shell to start development environment:
     ```
     nix-shell
     ```
-1. Instantiate Python virtual environment:
-    ```bash
-    python3.10 -m venv .venv
-    source .venv/bin/activate
-    pip install -r requirements.txt
-    pip install -r requirements-dev.txt
-    ```
-
-## Run tests
-
-```bash
-nox -s test
-```
+    Thinks you get:
+    * Appropriate version of Python
+    * Virtual environment with all dependencies installed.
+    * Handy aliases:
+        ```bash
+        ut  # run unit tests
+        run  # run the API
+        ```

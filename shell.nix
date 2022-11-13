@@ -7,14 +7,23 @@ mkShell {
         python39
         python39Packages.pip
         python39Packages.pip-tools
-        python39Packages.pip-tools
     ];
     shellHook = ''
+    echo "Running pip-compile..."
     pip-compile
+
+    echo "Setting environment..."
+    export PYTHONPATH="./src:$PYTHONPATH"
+
+    echo "Setting aliases..."
     alias dc='docker compose'
     alias pip='python -m pip'
-    echo "Use handy aliases:"
+    alias ut='pytest src'
+    alias run='python src/twts_api/main.py'
     echo "* 'dc' for 'docker compose'"
+    echo "* 'pip' for 'python -m pip'"
+    echo "* 'ut' to run tests with pytest"
+    echo "* 'run' to run the API"
 
     if [ -d "./.venv" ]
     then
@@ -24,9 +33,9 @@ mkShell {
         echo "Virtual environment (./.venv) does not exist."
         echo "Creating a new one..."
         python -m venv .venv
-        source .venv/bin/activate
-        pip install -r requirements.txt
-        pip install -r requirements-dev.txt
     fi
+    source .venv/bin/activate
+    pip install -r requirements.txt
+    pip install -r requirements-dev.txt
     '';
 }
