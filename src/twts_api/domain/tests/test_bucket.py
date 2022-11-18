@@ -7,8 +7,8 @@ def test_bucket_holds_a_name():
 
 def test_bucket_holds_added_timeseries():
     bucket = Bucket(name="test_bucket")
-    ts1 = Timeserie(name="timeserie1")
-    ts2 = Timeserie(name="timeserie2")
+    ts1 = Timeserie(name="timeserie1", unit="kWh", properties={})
+    ts2 = Timeserie(name="timeserie2", unit="kWh", properties={})
     bucket.add(ts1)
     bucket.add(ts2)
     assert bucket.get_by(ts1.name) == ts1
