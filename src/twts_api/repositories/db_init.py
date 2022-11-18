@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
+from json import dumps, loads
 from enum import unique
 from sqlalchemy import create_engine, text, Table, Column, Integer, String, ForeignKey
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import registry, relationship
 
 from twts_api.domain import Bucket, Timeserie
@@ -25,6 +27,8 @@ def init_db():
         Column("id", Integer, primary_key=True),
         Column("bucket_id", Integer, ForeignKey("bucket.id")),
         Column("name", String(50), unique=True),
+        Column("unit", String(50)),
+        Column("properties", JSONB),
     )
 
     mapper_registry.map_imperatively(Timeserie, timeserie_table)
@@ -33,7 +37,6 @@ def init_db():
         Bucket,
         bucket_table,
         properties={
-            # "_timeseries": relationship(Timeserie, backref="bucket", order_by=timeserie_table.c.id)
             "_timeseries": relationship(Timeserie, collection_class=list)
         },
     )

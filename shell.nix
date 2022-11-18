@@ -9,9 +9,6 @@ mkShell {
         python39Packages.pip-tools
     ];
     shellHook = ''
-    echo "Running pip-compile..."
-    pip-compile
-
     echo "Setting environment..."
     export PYTHONPATH="./src:$PYTHONPATH"
 
@@ -37,5 +34,6 @@ mkShell {
     source .venv/bin/activate
     pip install -r requirements.txt
     pip install -r requirements-dev.txt
+    pip install -r tests/contract/requirements.txt
     '';
 }

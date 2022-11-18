@@ -17,3 +17,8 @@ Timeseries store written in Python for educational purposes - showcase of archit
         ut  # run unit tests
         run  # run the API
         ```
+
+## Updating dependencies
+```
+pip-compile
+```

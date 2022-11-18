@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from psycopg2.extras import register_default_jsonb
 
 from twts_api.repositories import get_session, DbConfig
 from twts_api.repositories.bucket_repository import BucketRepository
